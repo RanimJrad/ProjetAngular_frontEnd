@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
+        <label>Types </label>
+        <select class="form-control form-control-lg" id="idTyp" name="idTyp" [(ngModel)]="idType" (change)="onChange()">
+            <option *ngFor="let typ of Types" value="{{typ.idtype}}">
+                {{typ.nomtype}}
+            </option>
+        </select>
+    </div>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-striped">
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Localisation</th>
+                    <th>Date Création</th>
+                    <th>Type</th>
+                </tr>
+                <tbody *ngFor="let SuperMARKET of Supermarket">
+                    <tr>
+                        <td>{{SuperMARKET.idSuperMarket}}</td>
+                        <td>{{SuperMARKET.nomSuperMarket}}</td>
+                        <td>{{SuperMARKET.localisationSuperMarket}}</td>
+                        <td>{{SuperMARKET.dateCreation | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{SuperMARKET.type.nomtype}}</td>
+                        <!-- <td><a  class="btn btn-danger" (click)="supprimerSupermarket(SuperMARKET)">Supprimer</a></td>
+                        <td><a  class="btn btn-success" [routerLink]="['/updateSupermarket',SuperMARKET.idSuperMarket]">Modifier</a></td> -->
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="container">
+    <div>
+        <h2>Modifier SuperMarket :</h2>
+    </div>
+    <form>
+        <div  class="col-sm-2 col-md-2 col-lg-2">
+            <label>ID SuperMarket</label>
+            <input readonly type="text" [(ngModel)]="currentSupermarket.idSuperMarket" name="idSuperMarket"class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Nom SuperMarket</label>
+            <input type="text" [(ngModel)]="currentSupermarket.nomSuperMarket" name="nomSuperMarket" class="form-control">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Localisation SuperMarket</label>
+            <input type="text" [(ngModel)]="currentSupermarket.localisationSuperMarket" name="localisationSuperMarket"class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Date création</label>
+            <input type="date" [ngModel]="currentSupermarket.dateCreation | date: 'yyyy-MM-dd'"
+                (ngModelChange)=" currentSupermarket.dateCreation= $event" name="dateCreation" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Types de supermarche</label>
+            <select class="form-control form-control-lg" id="idtype" name="idtype" [(ngModel)]="updatedTypeId">
+                <option *ngFor="let type of types" [value]="type.idtype">
+                    {{type.nomtype}}
+                </option>
+            </select>
+        </div>
+        <div class="mt-2">
+            <button type="submit" (click)="updateSupermarket()" class="btn btn-success">Modifer</button>
+        </div>
+    </form>
+</div>
