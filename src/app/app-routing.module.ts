@@ -9,6 +9,8 @@ import { superGuard } from './super.guard';
 import { RechercheParTypeComponent } from './recherche-par-type/recherche-par-type.component';
 import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
 import { RegisterComponent } from './register/register.component';
+import { VerifEmailComponent } from './verif-email/verif-email.component';
+import { ListeTypesComponent } from './liste-types/liste-types.component';
 
 const routes: Routes = [{path: "supermarket", component : SupermarketComponent},
 {path: "add", component : AddComponent, canActivate:[superGuard]},
@@ -18,6 +20,8 @@ const routes: Routes = [{path: "supermarket", component : SupermarketComponent},
 {path: 'app-forbidden', component: ForbiddenComponent},
 {path: "rechercheParType", component : RechercheParTypeComponent },
 {path: "rechercheParNom", component : RechercheParNomComponent},
+{ path: 'verifEmail', component: VerifEmailComponent },
+{path: "listeTypes", component : ListeTypesComponent},
 {path: "register", component : RegisterComponent}
 ]
 @NgModule({

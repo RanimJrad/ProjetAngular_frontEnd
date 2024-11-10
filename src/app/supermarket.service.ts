@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { TypeWrapper } from './model/typeWrapped.model';
+import { Image } from './model/image.model';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -54,7 +55,6 @@ export class SupermarketService {
   }
 
   listeSupermarkets(): Observable<SuperMarket[]> {
-    
     return this.http.get<SuperMarket[]>(this.apiURL + '/all');
   }
 
@@ -124,11 +124,55 @@ export class SupermarketService {
 
   rechercheParType(idTyp: number): Observable<SuperMarket[]> {
     let jwt = this.authService.getToken();
-        jwt = "Bearer "+jwt;
-        let httpHeaders = new HttpHeaders({"Authorization":jwt})
+    jwt = 'Bearer ' + jwt;
+    let httpHeaders = new HttpHeaders({ Authorization: jwt });
     const url = `${this.apiURL}/suptype/${idTyp}`;
-    return this.http.get<SuperMarket[]>(url,{
+    return this.http.get<SuperMarket[]>(url, {
       headers: httpHeaders,
     });
+  }
+
+  uploadImage(file: File, filename: string): Observable<Image> {
+    const imageFormData = new FormData();
+    imageFormData.append('image', file, filename);
+    const url = `${this.apiURL + '/image/upload'}`;
+    return this.http.post<Image>(url, imageFormData);
+  }
+
+  loadImage(id: number): Observable<Image> {
+    const url = `${this.apiURL + '/image/get/info'}/${id}`;
+    return this.http.get<Image>(url);
+  }
+
+  ajouterType(typ: Type): Observable<Type> {
+    let jwt = this.authService.getToken();
+    jwt = 'Bearer ' + jwt;
+    let httpHeaders = new HttpHeaders({ Authorization: jwt });
+    return this.http.post<Type>(this.apiURLType + '/addtype', typ, {
+      headers: httpHeaders,
+    });
+  }
+
+  uploadImageSup(
+    file: File,
+    filename: string,
+    idSuperMarket: number
+  ): Observable<any> {
+    const imageFormData = new FormData();
+    imageFormData.append('image', file, filename);
+    const url = `${this.apiURL + '/image/uplaodImageSup'}/${idSuperMarket}`;
+    return this.http.post(url, imageFormData);
+  }
+
+  supprimerImage(id: number) {
+    const url = `${this.apiURL}/image/delete/${id}`;
+    return this.http.delete(url, httpOptions);
+  }
+
+  uploadImageFS(file: File, filename: string, idSuperMarket: number): Observable<any> {
+    const imageFormData = new FormData();
+    imageFormData.append('image', file, filename);
+    const url = `${this.apiURL + '/image/uploadFS'}/${idSuperMarket}`;
+    return this.http.post(url, imageFormData);
   }
 }

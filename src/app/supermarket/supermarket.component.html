@@ -2,7 +2,7 @@
     <div class="card shadow mb-4">
     <div class="card-body">
     <table class="table table-striped">
-    <tr> <th>Id</th><th>Nom</th> <th>Localisation</th> <th>Date Création</th><th>Type</th> </tr>
+    <tr> <th>Id</th><th>Nom</th> <th>Localisation</th> <th>Date Création</th><th>Type</th><th>Image</th> </tr>
     <tbody *ngFor="let SuperMARKET of Supermarket">
     <tr >
     <td>{{SuperMARKET.idSuperMarket}}</td>
@@ -10,7 +10,13 @@
     <td>{{SuperMARKET.localisationSuperMarket}}</td>
     <td>{{SuperMARKET.dateCreation | date: 'dd/MM/yyyy'}}</td>
     <td>{{SuperMARKET.type.nomtype}}</td>
+
+    <td>
+        <img class="card-img-top img-responsive"
+        src="{{apiurl+'/image/loadfromFS/'+SuperMARKET.idSuperMarket}}"            style="height: 50px; width: 100px">
+    </td>
     
+
     <td><a  *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="supprimerSupermarket(SuperMARKET)">Supprimer</a></td> 
     <td><a *ngIf="authService.isAdmin()" class="btn btn-success" [routerLink]="['/updateSupermarket',SuperMARKET.idSuperMarket]">Modifier</a></td>
     

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SuperMarket } from '../model/supermarket.model';
 import { SupermarketService } from '../supermarket.service';
 import { AuthService } from '../auth.service';
+import { Image } from '../model/image.model';
 
 @Component({
   selector: 'app-supermarket',
@@ -9,7 +10,9 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./supermarket.component.css'],
 })
 export class SupermarketComponent implements OnInit {
-  Supermarket: SuperMarket[]=[];
+  Supermarket: SuperMarket[] = [];
+
+  apiurl:string='http://localhost:8081/SuperMarket/api';
 
   constructor(
     private SupermarketService: SupermarketService,
@@ -21,18 +24,12 @@ export class SupermarketComponent implements OnInit {
     this.SupermarketService.listeSupermarkets().subscribe((supers) => {
       console.log(supers);
       this.Supermarket = supers;
-
     });
 
     this.chargerSupermarkets();
   }
 
-  chargerSupermarkets(){
-    this.SupermarketService.listeSupermarkets().subscribe(sup => {
-    console.log(sup);
-    this.Supermarket = sup;
-    });
-    }
+  
 
   supprimerSupermarket(s: SuperMarket) {
     let conf = confirm('Etes-vous sûr ?');
@@ -42,4 +39,23 @@ export class SupermarketComponent implements OnInit {
         this.chargerSupermarkets();
       });
   }
+  /*chargerSupermarkets() {
+    this.SupermarketService.listeSupermarkets().subscribe((sup) => {
+      this.Supermarket = sup;
+      this.Supermarket.forEach((sups) => {
+
+       this.Supermarket.forEach((sup) => {
+          sup.imageStr = 'data:' + sup.images[0].type + ';base64,' +  sup.images[0].image;
+          });
+        
+      });
+    });
+  }*/
+    chargerSupermarkets(){
+      this.SupermarketService.listeSupermarkets().subscribe(sups => {
+      this.Supermarket = sups;
+      });
+      }
+
+ 
 }

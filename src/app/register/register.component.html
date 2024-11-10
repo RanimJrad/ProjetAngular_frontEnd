@@ -2,26 +2,29 @@
     <div class="row justify-content-md-center">
         <div class="col-md-4">
             <form [formGroup]="myForm">
-                <div class="alert alert-danger" *ngIf="err">
+                <div class="alert alert-danger" *ngIf= "err">
                     <strong>{{err}}</strong>
                 </div>
-
                 <div class="form-group">
                     <label>Nom Utilisateur :</label>
-    <input type="text" name="username" class="formcontrol" formControlName="username"  [(ngModel)]="user.username">
+                    <input type="text" name="username" class="formcontrol" formControlName="username"
+                        [(ngModel)]="user.username">
                 </div>
-    <span *ngIf="myForm.controls['username'].hasError('required')&& myForm.controls['username'].touched" class="text-danger">
+                <span *ngIf="myForm.controls['username'].hasError('required')&&
+    myForm.controls['username'].touched" class="text-danger">
                     Nom Utilisateur est obligatoire
-    </span>
+                </span>
                 <div class="form-group">
                     <label>email :</label>
                     <input type="text" name="email" class="form-control" formControlName="email"
                         [(ngModel)]="user.email">
                 </div>
-                <span *ngIf="myForm.controls['email'].hasError('required')&&  myForm.controls['email'].touched" class="text-danger">
+                <span *ngIf="myForm.controls['email'].hasError('required')&&
+    myForm.controls['email'].touched" class="text-danger">
                     email est obligatoire
                 </span>
-                <span *ngIf="myForm.controls['email'].hasError('email')&&  myForm.controls['email'].touched" class="text-danger">
+                <span *ngIf="myForm.controls['email'].hasError('email')&&
+    myForm.controls['email'].touched" class="text-danger">
                     email non valide
                 </span>
                 <div class="form-group">
@@ -39,15 +42,15 @@
                 </span>
                 <div class="form-group">
                     <label>Confirmer Mot de passe :</label>
-                    <input type="password" name="confirmPassword" formControlName="confirmPassword"
-                        class="form-control">
+                    <input type="password" name="confirmPassword"  formControlName="confirmPassword" class="form-control">
                 </div>
-        <span *ngIf="myForm.controls['confirmPassword'].hasError('required')&& myForm.controls['confirmPassword'].touched" class="text-danger">
+                <span *ngIf="myForm.controls['confirmPassword'].hasError('required')&&
+    myForm.controls['confirmPassword'].touched" class="text-danger">
                     confirmer mot de passe est obligatoire
                 </span>
                 <div>
-            <span *ngIf="myForm.get('confirmPassword')?.touched &&
-myForm.get('confirmPassword')?.value != myForm.get('password')?.value" class="text-danger">
+                    <span *ngIf="myForm.get('confirmPassword')?.touched &&
+    myForm.get('confirmPassword')?.value != myForm.get('password')?.value" class="text-danger">
                         Le mot de passe confrmé ne correspond pas au mot de passe tapé
                     </span>
                 </div>
@@ -56,8 +59,7 @@ myForm.get('confirmPassword')?.value != myForm.get('password')?.value" class="te
                     <div class="spinner-border" role="status">
                     <span class="sr-only">Loading...</span>
                     </div>
-                </div>
-
+                    </div>
                 <button type="button" [disabled]="myForm.invalid" class="btn btn-success"
                     (click)="onRegister()">S'insrire</button>
                 <p>vous avez un compte? <a routerLink="/login">se connecter </a></p>

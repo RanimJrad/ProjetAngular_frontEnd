@@ -14,6 +14,11 @@ import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.
 import { SearchFilterPipe } from './search-filter.pipe';
 import { RegisterComponent } from './register/register.component';
 import { TokenInterceptor } from './token.interceptor';
+import { VerifEmailComponent } from './verif-email/verif-email.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ListeTypesComponent } from './liste-types/liste-types.component';
+import { UpdateTypeComponent } from './update-type/update-type.component';
 
 
 
@@ -30,6 +35,9 @@ import { TokenInterceptor } from './token.interceptor';
     RechercheParNomComponent,
     SearchFilterPipe,
     RegisterComponent,
+    VerifEmailComponent,
+    ListeTypesComponent,
+    UpdateTypeComponent,
 
   
   ],
@@ -38,7 +46,9 @@ import { TokenInterceptor } from './token.interceptor';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [{ provide : HTTP_INTERCEPTORS,
 useClass : TokenInterceptor,

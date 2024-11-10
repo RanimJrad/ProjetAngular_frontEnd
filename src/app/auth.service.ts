@@ -20,8 +20,21 @@ export class AuthService {
   apiURL: string = 'http://localhost:8082/users';
   token!: string;
   private helper = new JwtHelperService();
+  public regitredUser: User = new User();
 
   constructor(private router: Router, private http: HttpClient) {}
+
+  
+  setRegistredUser(user: User) {
+    this.regitredUser = user;
+  }
+  getRegistredUser() {
+    return this.regitredUser;
+  }
+
+  validateEmail(code : string){
+    return this.http.get<User>(this.apiURL+'/verifyEmail/'+code);
+    }
 
   login(user: User) {
     return this.http.post<User>(this.apiURL + '/login', user, {
@@ -39,18 +52,17 @@ export class AuthService {
     if (this.token == undefined) return;
     const decodedToken = this.helper.decodeToken(this.token);
     this.roles = decodedToken.roles;
-    console.log("roles "+this.roles);
+    console.log('roles ' + this.roles);
     this.loggedUser = decodedToken.sub;
   }
 
   loadToken() {
     this.token = localStorage.getItem('jwt')!;
     this.decodeJWT();
-    }
+  }
 
-    isTokenExpired(): Boolean
-    {
-    return this.helper.isTokenExpired(this.token); 
+  isTokenExpired(): Boolean {
+    return this.helper.isTokenExpired(this.token);
   }
 
   /*SignIn(user: User): Boolean {
@@ -83,11 +95,11 @@ export class AuthService {
   logout() {
     this.loggedUser = undefined!;
     this.roles = undefined!;
-    this.token= undefined!;
+    this.token = undefined!;
     this.isloggedIn = false;
     localStorage.removeItem('jwt');
     this.router.navigate(['/login']);
-    }
+  }
 
   setLoggedUserFromLocalStorage(login: string) {
     this.loggedUser = login;
@@ -101,4 +113,10 @@ export class AuthService {
       }
     });
   }*/
+
+  registerUser(user: User) {
+    return this.http.post<User>(this.apiURL + '/register', user, {
+      observe: 'response',
+    });
+  }
 }
